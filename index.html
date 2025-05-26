@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T43WN2LE2S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-T43WN2LE2S');
+</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nima's Portfolio</title>
+  <meta name="description" content="Portfolio of Nima Aref – showcasing projects and experiences">
+
+  <link rel="icon" type="image/x-icon" href="Assets/Letter N SVG Icon.png">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;700;900"
+  />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #070a08; }
+    ::-webkit-scrollbar-thumb { background: #111c15; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #111c15; }
+
+    /* Animations */
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); }}
+    @keyframes fadeInUp   { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); }}
+
+    /* Utility classes */
+    .animate-fadeInDown { animation: fadeInDown 0.5s ease-out forwards; }
+    .animate-fadeInUp   { animation: fadeInUp   0.6s ease-out forwards; }
+
+    /* full-page dot-grid canvas */
+    #dotCanvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    
+    /* Hover & accordion remained unchanged… */
+    .nav-link-hover:hover     { color: #0c5c2e; transform: translateY(-2px); transition: .3s; }
+    .button-hover:hover       { opacity: .9; transform: scale(1.05); transition: .2s; }
+    .project-card-hover:hover { transform: translateY(-8px); box-shadow: 0 12px 24px rgba(0,0,0,0.25); transition: .3s; }
+    .experience-card-hover:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); transition: .3s; }
+
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height .5s, padding .5s; padding: 0 1.25rem; }
+    .accordion-item.active .accordion-content { max-height: 1000px; padding: 1.25rem; }
+    .accordion-toggle svg { transition: transform .3s; }
+    .accordion-item.active .accordion-toggle svg { transform: rotate(180deg); }
+  </style>
+</head>
+<body class="bg-gradient-to-r from-gray-900 to-black text-white font-[Space Grotesk]">
+
+  <!-- animated dot-grid background -->
+  <canvas id="dotCanvas"></canvas>
+
+  <div class="min-h-screen flex flex-col">
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 flex items-center justify-between px-6 py-5 
+bg-[#0a0a0a]/70 backdrop-blur-sm sm:bg-transparent sm:backdrop-blur-none transition-all duration-300">
+  <!-- Logo -->
+          <div class="flex items-center gap-4">
+        <!-- Logo -->
+        <div class="w-[90px] h-[90px] flex items-center justify-center">
+          <svg class="w-full h-full hover:rotate-12 transition-transform" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <style>
+                .letter {
+                  font-family: serif;
+                  font-size: 350px;
+                  font-weight: bold;
+                  fill: #ffffff;
+                }
+              </style>
+            </defs>
+            <text x="100" y="400" class="letter">N</text>
+            <text x="230" y="400" class="letter">A</text>
+          </svg>
+        </div>
+      </div>
+    
+      <nav class="flex items-center gap-6">
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/nima-aref-b1696920a/" target="_blank" aria-label="LinkedIn"
+        class="transition-colors duration-300 text-white hover:text-blue-500">
+       <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0 0 256 256" fill="currentColor">
+         <g fill="currentColor" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+            stroke-linejoin="miter" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none"
+            text-anchor="none" style="mix-blend-mode: normal">
+           <g transform="scale(5.12,5.12)">
+             <path d="M41,4h-32c-2.76,0 -5,2.24 -5,5v32c0,2.76 2.24,5 5,5h32c2.76,0 5,-2.24 5,-5v-32c0,-2.76 -2.24,-5 -5,-5zM17,20v19h-6v-19zM11,14.47c0,-1.4 1.2,-2.47 3,-2.47c1.8,0 2.93,1.07 3,2.47c0,1.4 -1.12,2.53 -3,2.53c-1.8,0 -3,-1.13 -3,-2.53zM39,39h-6c0,0 0,-9.26 0,-10c0,-2 -1,-4 -3.5,-4.04h-0.08c-2.42,0 -3.42,2.06 -3.42,4.04c0,0.91 0,10 0,10h-6v-19h6v2.56c0,0 1.93,-2.56 5.81,-2.56c3.97,0 7.19,2.73 7.19,8.26z"/>
+           </g>
+         </g>
+       </svg>
+     </a>
+     
+        <!-- GitHub -->
+        <a href="https://github.com/nima8338" target="_blank" aria-label="GitHub" class="transition-colors duration-300 hover:text-purple-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="35" height="35">
+            <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.4 7.86 10.94.58.1.79-.25.79-.56v-2.02c-3.2.7-3.87-1.55-3.87-1.55-.52-1.33-1.27-1.68-1.27-1.68-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.64 1.23 3.28.94.1-.74.4-1.23.72-1.51-2.55-.3-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.17-3.1-.12-.3-.51-1.5.11-3.14 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.18-1.49 3.15-1.18 3.15-1.18.62 1.64.23 2.84.11 3.14.73.81 1.17 1.84 1.17 3.1 0 4.43-2.7 5.4-5.27 5.7.41.36.78 1.07.78 2.15v3.18c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/>
+          </svg>
+        </a>
+      
+        <!-- Resume Button -->
+        <a href="Nima_Aref_Final1.pdf" target="_blank" rel="noopener noreferrer" class=" button-hover px-4 py-2 bg-green-900 text-white font-bold rounded  transition-colors">Resume</a>
+      </nav>
+      
+    </header>
+    
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow px-6 md:px-20 lg:px-40 py-10">
+      <!-- Hero, Projects, Experience, Skills, Contact… (unchanged) -->
+      <!-- … -->
+      <section class="mb-20  bg-center p-6 shadow-xl rounded-xl animate-fadeInUp" >
+        <h2 class="text-5xl text-left font-black mb-2">Nima Aref</h2>
+        <p class="text-lg text-left text-[#7b9e8a] mb-6">Software Engineer & Creative Developer</p>
+        <a href="#contact" class="button-hover bg-green-900 px-8 py-3 font-bold rounded-lg inline-block">Contact Me</a>
+      </section>
+      
+      
+        
+      
+        <section class="mb-20 scroll-mt-20 animate-fadeInUp" id="experience" style="animation-delay: 0.6s;">
+        <h2 class="text-white text-3xl font-bold leading-tight tracking-tight px-4 pb-8 pt-5">Work Experience</h2>
+        <div class="space-y-8 p-4">
+          <div class="flex flex-col sm:flex-row gap-6 p-6 bg-[#111c15] rounded-xl shadow-lg experience-card-hover">
+            <div class="flex-shrink-0 w-52">
+              <h3 class="text-xl font-semibold text-white">Security Analyst Intern</h3>
+              <p class="text-md text-[#7b9e8a]">Precise Cyber solutions</p>
+              <p class="text-sm text-[#5c7a6a]">Jan. 2024 - Aug. 2024</p>
+            </div>
+            <div>
+              <p class="text-[#a0c2b3] leading-relaxed">Assisted in monitoring and analyzing network traffic to identify potential threats and vulnerabilities, while also contributing as part of a team to develop interactive cybersecurity education software for K-12 students, emphasizing safety best practices and engagement.</p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Threat Detection</span>
+                <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">React</span>
+                <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">UI/UX</span>
+                <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Flask</span>
+                <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Agile</span>
+
+                </div>
+            </div>
+          </div>
+          
+          <!-- Second box -->
+          <div class="flex flex-col sm:flex-row gap-6 p-6 bg-[#111c15] rounded-xl shadow-lg experience-card-hover">
+            <div class="flex-shrink-0 w-52">
+              <h3 class="text-xl font-semibold text-white">CyberSecurity Instructor</h3>
+              <p class="text-md text-[#7b9e8a]">Independent</p>
+              <p class="text-sm text-[#5c7a6a]">2022 - Present</p>
+            </div>
+            <div>
+              <p class="text-[#a0c2b3] leading-relaxed">Founded a student-led cybersecurity lab and developed an advanced curriculum focused on cyber threat defense, mentoring a team in network security, system administration, and ethical hacking. Led the team to a 4th place finish out of 1,100 teams in the national CyberPatriot competition organized by the Air & Space Forces Association.</p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Team Leadership</span>
+                <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Wireshark</span>
+                <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Cisco Packet Tracer</span>
+                <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Splunk</span>
+                <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Socket.IO</span>
+                <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Nmap</span>
+
+                </div>
+            </div>
+          </div>
+          
+          <!-- Third box (CodeNinjas, both roles) -->
+          <div class="flex flex-col sm:flex-row gap-6 p-6 bg-[#111c15] rounded-xl shadow-lg experience-card-hover">
+            <div class="flex-shrink-0 w-52">
+              <div class="mb-4">
+                <h3 class="text-xl font-semibold text-white">Coding Instructor</h3>
+                <p class="text-md text-[#7b9e8a]">CodeNinjas</p>
+                <p class="text-sm text-[#5c7a6a]">Jan 2020 – Aug 2022</p>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-white">Center Director</h3>
+                <p class="text-md text-[#7b9e8a]">CodeNinjas</p>
+                <p class="text-sm text-[#5c7a6a]">Summers 2023 – 2024</p>
+              </div>
+            </div>
+            <div>
+              <p class="text-[#a0c2b3] leading-relaxed mb-4">Taught kids aged 8–14 programming through game-based curricula, fostering creativity and critical thinking. Supported a fun and educational environment while helping students build foundational coding skills.</p>
+              <p class="text-[#a0c2b3] leading-relaxed">Oversaw summer camp operations, including staff supervision, marketing efforts, and day-to-day logistics. Ensured programs aligned with educational goals while maintaining an engaging environment for all students.</p><br>
+              <!-- Tags... -->
+             
+                  <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Curriculum Development</span>
+                  <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Youth Engagement</span>
+                  <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Unreal Engine</span>
+                  <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Unity</span>
+                  <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Javascript</span>
+                  <span class="text-xs font-medium bg-[#1a2920] text-[#7b9e8a] px-2 py-1 rounded-full">Zbrush</span>
+  
+            </div>
+          </div>
+        
+        </section>
+        <section id="featured-projects" class="relative mb-20 scroll-mt-20">
+          <!-- Title -->
+          <h2 class="text-white text-3xl font-bold text-center mb-8">Featured Projects</h2>
+        
+          <!-- Pagination & Grid -->
+          <div class="flex items-center justify-center space-x-4">
+          
+        
+            <!-- removed max-w-* & px so grid can fill 100% of its container -->
+            <div id="projectGrid"
+                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
+                 style="align-items: start;">
+              <!-- cards get injected here -->
+            </div>
+        
+            
+          </div>
+        
+          <!-- Center 3rd card on mid-size, hide marker, smooth expand -->
+          <style>
+            @media (min-width: 640px) and (max-width: 1023px) {
+              #projectGrid .project-card:nth-child(3) {
+                justify-self: center;
+              }
+            }
+            #projectGrid summary::-webkit-details-marker,
+            #projectGrid summary::marker {
+              display: none;
+            }
+            .project-details .detail-content {
+              max-height: 0;
+              overflow: hidden;
+              transition: max-height 0.3s ease-in-out;
+            }
+            .project-details[open] .detail-content {
+              max-height: 500px;
+            }
+          </style>
+        
+          <script>
+            (function() {
+              const projects = [
+                { title: "FaceX Software Service",   img: "Assets/facex.png",          fullDesc: "Created an iPhone app leveraging the TrueDepth camera to scan faces and generate 3D models, enabling theproduction of custom-fit masks and personalized action figures", tags: ["React","Node.js","MongoDB","UX/UI"] },
+                { title: "Polk & Associates Website",   img: "Assets/p.png",          fullDesc: "Built the website for the Polk & Associates Construction Inc to help their business establish a strong online presence through clean, responsive, and user-friendly websites. From design to deployment, I handled every aspect of development to ensure the site reflects the brand’s professionalism and makes a lasting impact.", tags: ["React","Node.js","MongoDB","UX/UI"], link: "https://polkconstructiontn.com/",linkText:"View Website" },
+                { title: "Boston Dynamics’ Spot",   img: "Assets/spot.jpg",    fullDesc: "Developed and programmed dance routines for the Boston Dynamics robot dog, Spot, to perform at a basketball game,and implemented autonomous navigation algorithms for mail and package delivery to classrooms.", tags: ["Flutter","Firebase","E-commerce"], link: "https://www.youtube.com/watch?v=Iy-q4JJtxxQ", linkText:"Watch Video"},
+                { title: "PickleTrack",   img: "Assets/Best Pickleball Paddles 2023.jpeg",           fullDesc: "PickleTrack is an AI-powered video analysis system that uses a single camera to automatically detect rule violations during pickleball games. It identifies when the ball lands out of bounds and when a player steps into the kitchen during a volley—acting as a real-time referee for casual and competitive play. ", tags: ["YOLOv8","OpenCV","FastAPI","MediaPipe"] },
+                { title: "Inventory System (ArefID)", img: "Assets/aref.png",   fullDesc: "Built a backend application that uses RFID technology to automatically track inventory in real time. The system scans RFID-tagged items as they enter or leave a storage area, automatically updating counts without manual input", tags: ["AWS Lambda","API Gateway","Serverless"]},
+                { title: "A-List Accessories",    img: "Assets/abraham.jpeg", fullDesc: "I co-founded AListAccessories with my roommate, creating 3D-printed celebrity-inspired planters and home décor. We launched the business to blend pop culture with design, and won $2,000 in startup funding through an entrepreneurship competition", tags: ["3D Modeling(Blender)","Branding","Market Research"], link: "https://www.etsy.com/shop/alistaccessoriesco/?etsrc=sdt" }
+              ];
+        
+             
+              const grid = document.getElementById("projectGrid")
+                  
+        
+                    function render() {
+  grid.innerHTML = "";
+  projects.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "project-card bg-[#111c15] rounded-xl overflow-hidden flex flex-col w-full";
+    card.innerHTML = `
+      <img src="${p.img}" alt="${p.title}" class="w-full h-48 object-cover">
+      <details class="project-details group flex flex-col px-6 py-4 flex-1">
+        <summary class="flex items-center justify-between cursor-pointer">
+          <h3 class="text-white text-xl font-semibold">${p.title}</h3>
+          <svg class="w-5 h-5 text-white transition-transform duration-300 group-open:rotate-180"
+               fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M19 9l-7 7-7-7"/>
+          </svg>
+        </summary>
+        <div class="detail-content">
+          <p class="mt-4 text-[#a0c2b3]">${p.fullDesc}</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            ${p.tags.map(t => `<span class="bg-[#002c14] text-white px-3 py-1 rounded-full text-sm">${t}</span>`).join('')}
+          </div>
+          ${p.link ? `<a href="${p.link}" target="_blank" class="mt-4 inline-block text-[#00bfa5]">${p.linkText || "View Website"} ↗</a>` : ""}
+        </div>
+      </details>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+        
+              
+        
+              render();
+            })();
+          </script>
+        </section>
+        
+        <section class="mb-10 scroll-mt-20 animate-fadeInUp" id="contact" style="animation-delay: 1s;">
+        <h2 class="text-white text-3xl font-bold leading-tight tracking-tight px-4 pb-8 pt-5">Get In Touch</h2>
+        <div class="bg-[#111c15] p-8 rounded-xl shadow-lg">
+        <p class="text-[#a0c2b3] text-lg mb-6 text-center">
+                        Have a project in mind or just want to connect? Feel free to reach out!
+                      </p>
+        <div class=" gap-8 mb-8">
+        <div class="flex flex-col items-center p-6 bg-[#1a2920] rounded-lg hover:shadow-xl transition-shadow duration-300">
+        <svg class="text-[#0c5c2e] mb-3" fill="none" height="48" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="48" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        <h3 class="text-white text-xl font-semibold mb-1">Email</h3>
+        <a class="text-[#7b9e8a] hover:text-[#0c5c2e] transition-colors duration-300" href="mailto:nima83.nt@gmail.com">nima83.nt@gmail.com</a>
+        </div>
+        
+        </div>
+        <p class="text-[#7b9e8a] text-center text-sm">
+                        Alternatively, you can connect with me on LinkedIn using the link in the header.
+                      </p>
+        </div>
+        </section>
+        <h2 class="text-white text-3xl font-bold leading-tight tracking-tight px-4 pb-8 pt-5">Some curated tunes 🔊
+
+        </h2>
+        
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5JAJG1sCCr7mcvzzy8SNw1?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-[#1a2920] py-8 text-center">
+      <p class="text-[#7b9e8a] text-sm">© <span id="currentYear"></span> Nima's Portfolio. Crafted with care.</p>
+    </footer>
+  </div>
+
+
+  <script>
+    // year and accordion logic (unchanged)
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    document.querySelectorAll('.accordion-item').forEach(item => {
+      item.querySelector('.accordion-toggle').addEventListener('click', () => {
+        document.querySelectorAll('.accordion-item.active').forEach(a => a.classList.remove('active'));
+        item.classList.toggle('active');
+      });
+    });
+
+    // — Animated Dot Grid — 
+    const dotCanvas = document.getElementById('dotCanvas');
+    const dCtx = dotCanvas.getContext('2d');
+    let dots = [];
+
+    function initDots() {
+      dotCanvas.width  = window.innerWidth;
+      dotCanvas.height = window.innerHeight;
+      dots = [];
+      const spacing = 50;
+      for (let x = spacing/2; x < dotCanvas.width; x += spacing) {
+        for (let y = spacing/2; y < dotCanvas.height; y += spacing) {
+          dots.push({
+            x, y,
+            freq: Math.random() * 0.5 + 0.5,
+            phase: Math.random() * Math.PI * 2,
+            base: 0.2 + Math.random() * 0.2,
+            amp:  0.3 + Math.random() * 0.2
+          });
+        }
+      }
+    }
+    window.addEventListener('resize', initDots);
+    initDots();
+
+    function animateDots(ts) {
+      const t = ts / 2500;
+      dCtx.clearRect(0, 0, dotCanvas.width, dotCanvas.height);
+      for (let dot of dots) {
+        let b = dot.base + dot.amp * Math.sin((2*Math.PI*dot.freq*t) + dot.phase);
+        b = Math.max(0, Math.min(1, b));
+        dCtx.fillStyle = `rgba(129, 133, 137,${b})`;
+        dCtx.fillRect(dot.x - 1, dot.y - 1, 2, 2);
+      }
+      requestAnimationFrame(animateDots);
+    }
+    requestAnimationFrame(animateDots);
+  </script>
+</body>
+</html>
