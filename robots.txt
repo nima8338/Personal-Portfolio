@@ -1,0 +1,27 @@
+# Search engines and AI assistants are welcome to read and cite this site.
+User-agent: *
+Allow: /
+Disallow: /worker/
+Disallow: /resume/
+
+# AI crawlers, named explicitly so it's clear they're allowed
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://www.aref.dev/sitemap.xml

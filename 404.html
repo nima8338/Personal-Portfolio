@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page not found · Nima Aref</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#f5f4f0" />
+  <link rel="icon" href="/Assets/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/Assets/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/Assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@700;900&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" />
+  <!-- Absolute paths: GitHub Pages serves this file for any missing URL, at any depth -->
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .lost {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: grid;
+      align-content: center;
+      gap: var(--s6);
+      width: min(100%, 40rem);
+      margin-inline: auto;
+      padding: var(--s7) var(--s4);
+    }
+    .lost .brand { justify-self: start; }
+    .lost-board {
+      display: block;
+      width: 100%;
+      aspect-ratio: 2.1;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--bg-sunken);
+      touch-action: pan-y;
+      cursor: crosshair;
+    }
+    .lost .title { margin-top: var(--s2); }
+    .lost p.lede { margin-top: var(--s4); font-size: 1.125rem; }
+    .lost .actions { margin-top: var(--s5); }
+  </style>
+</head>
+<body>
+  <main class="lost">
+    <a class="brand" href="/" aria-label="Nima Aref, home">
+      <span class="brand-mark" aria-hidden="true">N</span>
+      <span class="brand-name">nimaaref</span>
+    </a>
+
+    <canvas class="lost-board" role="img" aria-label="404 in dot-matrix lights"></canvas>
+
+    <div>
+      <p class="eyebrow">Error 404</p>
+      <h1 class="title">This page wandered off</h1>
+      <p class="lede">The link might be old, or the page moved. Push the dots around for a bit, then head back.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/">Back home</a>
+        <a class="btn" href="/#work">See my work</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // A smaller cousin of the home page board: "404" on damped springs.
+    (() => {
+      const canvas = document.querySelector('.lost-board');
+      const ctx = canvas.getContext('2d');
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+      const GLYPHS = {
+        4: ['00010', '00110', '01010', '10010', '11111', '00010', '00010'],
+        0: ['01110', '10001', '10011', '10101', '11001', '10001', '01110'],
+      };
+      const TEXT = '404';
+      const STIFFNESS = 0.06;
+      const DAMPING = 0.3;
+      const style = getComputedStyle(document.documentElement);
+      const colors = { on: style.getPropertyValue('--accent').trim(), off: style.getPropertyValue('--dot-off').trim() };
+
+      let width = 0;
+      let height = 0;
+      let spacing = 10;
+      let cols = 0;
+      let rows = 0;
+      let ox = 0;
+      let oy = 0;
+      let dots = [];
+      let raf = 0;
+      let bootStart = performance.now();
+      const pointer = { x: 0, y: 0, active: false };
+
+      function layout() {
+        const rect = canvas.getBoundingClientRect();
+        if (!rect.width) return;
+        width = rect.width;
+        height = rect.height;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const textCols = TEXT.length * 6 - 1;
+        spacing = Math.min(width / (textCols + 8), height / 13);
+        cols = Math.floor(width / spacing);
+        rows = Math.floor(height / spacing);
+        ox = (width - (cols - 1) * spacing) / 2;
+        oy = (height - (rows - 1) * spacing) / 2;
+
+        const lit = new Set();
+        const left = Math.floor((cols - textCols) / 2);
+        const top = Math.floor((rows - 7) / 2);
+        [...TEXT].forEach((ch, i) => GLYPHS[ch].forEach((bits, gy) => [...bits].forEach((bit, gx) => {
+          if (bit === '1') lit.add(`${left + i * 6 + gx},${top + gy}`);
+        })));
+
+        dots = [];
+        for (let c = 0; c < cols; c++) {
+          for (let r = 0; r < rows; r++) {
+            if (!lit.has(`${c},${r}`)) continue;
+            const hx = ox + c * spacing;
+            const hy = oy + r * spacing;
+            dots.push({ hx, hy, x: hx, y: hy, vx: 0, vy: 0, col: c });
+          }
+        }
+        wake();
+      }
+
+      function step() {
+        const reach = spacing * 6;
+        let moving = false;
+        for (const d of dots) {
+          let ax = (d.hx - d.x) * STIFFNESS - d.vx * DAMPING;
+          let ay = (d.hy - d.y) * STIFFNESS - d.vy * DAMPING;
+          if (pointer.active) {
+            const dx = d.x - pointer.x;
+            const dy = d.y - pointer.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < reach && dist > 0.01) {
+              const f = (1 - dist / reach) ** 2 * 2.4;
+              ax += (dx / dist) * f;
+              ay += (dy / dist) * f;
+            }
+          }
+          d.vx += ax; d.vy += ay; d.x += d.vx; d.y += d.vy;
+          if (Math.abs(d.vx) + Math.abs(d.vy) > 0.02 || Math.abs(d.x - d.hx) + Math.abs(d.y - d.hy) > 0.05) moving = true;
+          else { d.x = d.hx; d.y = d.hy; d.vx = 0; d.vy = 0; }
+        }
+        return moving;
+      }
+
+      function draw(now) {
+        ctx.clearRect(0, 0, width, height);
+        const rOff = spacing * 0.2;
+        const rOn = spacing * 0.36;
+        ctx.fillStyle = colors.off;
+        ctx.beginPath();
+        for (let c = 0; c < cols; c++) {
+          for (let r = 0; r < rows; r++) {
+            const x = ox + c * spacing;
+            const y = oy + r * spacing;
+            ctx.moveTo(x + rOff, y);
+            ctx.arc(x, y, rOff, 0, Math.PI * 2);
+          }
+        }
+        ctx.fill();
+
+        // Power on column by column, like the home page board
+        const litCols = reduced.matches ? Infinity : (now - bootStart) / 22;
+        ctx.fillStyle = colors.on;
+        ctx.beginPath();
+        for (const d of dots) {
+          if (d.col > litCols) continue;
+          ctx.moveTo(d.x + rOn, d.y);
+          ctx.arc(d.x, d.y, rOn, 0, Math.PI * 2);
+        }
+        ctx.fill();
+        return litCols < cols;
+      }
+
+      function frame(now) {
+        raf = 0;
+        const moving = reduced.matches ? false : step();
+        const booting = draw(now);
+        if (moving || pointer.active || booting) raf = requestAnimationFrame(frame);
+      }
+      function wake() { if (!raf) raf = requestAnimationFrame(frame); }
+
+      const local = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+      };
+      canvas.addEventListener('pointermove', (e) => {
+        if (reduced.matches) return;
+        Object.assign(pointer, local(e), { active: true });
+        wake();
+      });
+      canvas.addEventListener('pointerleave', () => { pointer.active = false; wake(); });
+      canvas.addEventListener('pointerdown', (e) => {
+        if (reduced.matches) return;
+        const p = local(e);
+        const radius = spacing * 20;
+        for (const d of dots) {
+          const dx = d.x - p.x;
+          const dy = d.y - p.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < radius && dist > 0.01) {
+            const kick = (1 - dist / radius) * spacing * 1.4;
+            d.vx += (dx / dist) * kick;
+            d.vy += (dy / dist) * kick;
+          }
+        }
+        wake();
+      });
+
+      new ResizeObserver(() => requestAnimationFrame(layout)).observe(canvas);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# Local tooling, not part of the site
+.agents/
+.claude/
+skills-lock.json
+node_modules/
+.wrangler/
+.DS_Store
+.tmp-*

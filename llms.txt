@@ -1,0 +1,46 @@
+# Nima Aref
+
+> Nima Aref is a product engineer based in Franklin, Tennessee, who builds AI systems end to end: agents, retrieval and the cloud infrastructure they run on. He is Lead Product Engineer at Omega Business Solutions, co-founder of Sightline (an Omega venture), and Technical Lead & Development Consultant at InPaceline. He also takes on a small number of freelance projects.
+
+## Contact
+
+- Website: https://www.aref.dev/
+- Email: nima83.nt@gmail.com
+- LinkedIn: https://www.linkedin.com/in/nima-aref-b1696920a/
+- GitHub: https://github.com/nima8338
+- Résumé (PDF): https://www.aref.dev/Nima_Aref_Resume.pdf
+
+## Current work
+
+- Omega Business Solutions, Lead Product Engineer (April 2026 to present): delivers AI systems end to end, from architecture through production deployment.
+- Sightline, co-founder: developer tooling that gives engineering teams visibility into, and guardrails around, the AI coding agents they use.
+- InPaceline, Technical Lead & Development Consultant (May 2025 to present): leads product and engineering for InPaceline OS and consults for founders building their own products.
+- Freelance developer (2024 to present): AI systems, web apps and websites for small businesses and founders.
+
+## Selected work
+
+- Gut Girls Hub (2026): paid membership portal and marketing site for a gut-health coaching business. Next.js, Firebase, Cloud Functions, Stripe. https://www.gutgirls.health
+- Fit + Faith 615 (2026): community website with a self-serve CMS and HubSpot sign-ups on Cloudflare Workers, plus an offline-first QR wristband app for event lead capture. https://fitandfaith615.com
+- ExitRich.ai (2026): business-valuation prototype with live scoring and advisor booking.
+- Polk & Associates Construction (2024): company website. https://polkconstructiontn.com/
+- Side projects: PickleTrack (computer-vision pickleball referee), FaceX (TrueDepth face scanning for custom-fit masks), Boston Dynamics' Spot programming, A-List Accessories (3D-printed décor shop).
+
+## Earlier experience
+
+- AI Research Intern, LEGO x Google (2025)
+- Security Analyst Intern, Precise Cyber Solutions (2024)
+- Cybersecurity Instructor (2022 to 2024): led a student team to 2nd of 1,100 teams in the national CyberPatriot competition
+- AI & Autonomy Trainee, Tesla (2022)
+- Code Ninjas, Coding Instructor and Center Director (2020 to 2024)
+
+## Education
+
+- B.S. Information Sciences, AI & Cybersecurity concentration, The University of Tennessee, Knoxville (2026)
+
+## Services
+
+AI systems and computer vision, web apps and websites, iOS apps, backends and automation.
+
+## Skills
+
+AI agents, MCP, RAG, vector databases, PyTorch, JAX, OpenCV, YOLOv8, Core ML; AWS, Google Cloud, Azure, Vercel, Cloudflare, Docker, Kubernetes, Terraform, CI/CD; Python, TypeScript, Swift, Next.js, React, Node.js, FastAPI, Postgres, Supabase, Redis.
