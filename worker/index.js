@@ -8,9 +8,10 @@ const LIMITS = { name: 120, email: 200, type: 40, message: 5000 };
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    // One canonical address: aref.dev → www.aref.dev
-    if (url.hostname === 'aref.dev') {
-      url.hostname = 'www.aref.dev';
+    // One canonical address: https://www.aref.dev
+    if (url.hostname === 'aref.dev' || url.protocol === 'http:') {
+      url.hostname = url.hostname === 'aref.dev' ? 'www.aref.dev' : url.hostname;
+      url.protocol = 'https:';
       return Response.redirect(url.toString(), 301);
     }
     if (url.pathname === '/api/contact') return contact(request, env, url);

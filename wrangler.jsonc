@@ -14,10 +14,15 @@
     // anything that isn't the contact API to the static files
     "run_worker_first": true
   },
+  // Serve the site on both hostnames; the Worker redirects aref.dev to www
+  "routes": [
+    { "pattern": "www.aref.dev", "custom_domain": true },
+    { "pattern": "aref.dev", "custom_domain": true }
+  ],
   "send_email": [{ "name": "EMAIL" }],
   "vars": {
     "TO_EMAIL": "nima83.nt@gmail.com",
-    "FROM_EMAIL": "contact@aref.dev"
+    "FROM_EMAIL": "nima@aref.dev"
   },
   "observability": { "enabled": true }
 }
