@@ -61,10 +61,11 @@
   });
 
   /* ── Inquiry form ──────────────────────────
-     With FORM_ENDPOINT set (the Cloudflare Worker in worker/contact), inquiries are
-     emailed to me directly. Until then, the form opens a pre-filled email instead. */
+     Posts to the site's own /api/contact (the Cloudflare Worker in worker/index.js),
+     which emails the inquiry. If that endpoint isn't there, for example on a static
+     host, the form falls back to opening a pre-filled email instead. */
 
-  const FORM_ENDPOINT = ''; // e.g. 'https://contact.aref.dev'
+  const FORM_ENDPOINT = '/api/contact';
   const CONTACT_EMAIL = 'nima83.nt@gmail.com';
   const form = $('#inquiry');
   const formStatus = $('.form-status', form);
@@ -118,20 +119,13 @@
     const data = Object.fromEntries(new FormData(form));
     if (data.company) return; // filled the spam trap: quietly do nothing
 
-    if (!FORM_ENDPOINT) {
-      const lines = [
-        `Name: ${data.name}`,
-        `Email: ${data.email}`,
-        `Building: ${data.type}`,
-        '',
-        data.message,
-      ];
+    const openMailto = () => {
+      const lines = [`Name: ${data.name}`, `Email: ${data.email}`, `Building: ${data.type}`, '', data.message];
       const subject = `Project inquiry: ${data.type}`;
       window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
       setStatus('Opening your email app with everything filled in.', 'ok');
       track('inquiry_submit', { type: data.type, method: 'mailto' });
-      return;
-    }
+    };
 
     form.classList.add('is-sending');
     setStatus('Sending…');
@@ -141,9 +135,10 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...data, elapsed: Date.now() - formStarted, page: location.href }),
       });
+      if ([404, 405, 501].includes(res.status)) { openMailto(); return; } // no backend here
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       form.reset();
-      setStatus('Thanks, it\'s in my inbox. I\'ll be in touch.', 'ok');
+      setStatus("Thanks, it's in my inbox. I'll be in touch.", 'ok');
       track('inquiry_submit', { type: data.type, method: 'form' });
     } catch (err) {
       setStatus(`That didn't send. Email me at ${CONTACT_EMAIL} instead.`, 'error');

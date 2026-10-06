@@ -1,0 +1,23 @@
+// aref.dev: static site + contact form on one Cloudflare Worker.
+// Deploy: npx wrangler deploy (Node 22+). Files to skip are listed in .assetsignore.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "aref-dev",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+    // The Worker sees every request first (for the aref.dev → www redirect), then hands
+    // anything that isn't the contact API to the static files
+    "run_worker_first": true
+  },
+  "send_email": [{ "name": "EMAIL" }],
+  "vars": {
+    "TO_EMAIL": "nima83.nt@gmail.com",
+    "FROM_EMAIL": "contact@aref.dev"
+  },
+  "observability": { "enabled": true }
+}

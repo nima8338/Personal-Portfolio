@@ -1,0 +1,13 @@
+# Not part of the public site: kept out of the Cloudflare upload
+.git
+.gitignore
+.assetsignore
+.agents
+.claude
+.wrangler
+.DS_Store
+node_modules
+worker
+wrangler.jsonc
+skills-lock.json
+CNAME
