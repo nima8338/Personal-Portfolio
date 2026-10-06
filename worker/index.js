@@ -16,7 +16,14 @@ export default {
     }
     if (url.pathname === '/api/contact') return contact(request, env, url);
     if (url.pathname.startsWith('/api/')) return json({ error: 'Not found' }, 404);
-    return env.ASSETS.fetch(request);
+    const response = await env.ASSETS.fetch(request);
+    // The workers.dev address is only a backup; keep it out of search results
+    if (url.hostname.endsWith('.workers.dev')) {
+      const backup = new Response(response.body, response);
+      backup.headers.set('X-Robots-Tag', 'noindex');
+      return backup;
+    }
+    return response;
   },
 };
 

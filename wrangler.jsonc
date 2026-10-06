@@ -4,6 +4,9 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "aref-dev",
   "main": "worker/index.js",
+  // Keep the *.workers.dev address as a backup (marked noindex in worker/index.js)
+  "workers_dev": true,
+  "preview_urls": false,
   "compatibility_date": "2026-09-01",
   "assets": {
     "directory": ".",
